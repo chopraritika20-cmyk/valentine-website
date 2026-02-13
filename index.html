@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For My Love 💖</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ff9a9e, #fecfef);
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
+        h1 {
+            margin-top: 100px;
+            font-size: 40px;
+            color: white;
+        }
+
+        .buttons {
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 20px;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            background-color: #ff1e4d;
+        }
+
+        #noBtn {
+            background-color: white;
+            color: #ff4d6d;
+            position: absolute;
+        }
+
+        #message {
+            display: none;
+            margin-top: 50px;
+            font-size: 28px;
+            color: white;
+        }
+
+        .heart {
+            position: fixed;
+            top: -10px;
+            font-size: 20px;
+            animation: fall 5s linear infinite;
+            color: white;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Will you be my Valentine? 💌</h1>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="showMessage()">Yes 💖</button>
+        <button id="noBtn" onmouseover="moveButton()">No 🙈</button>
+    </div>
+
+    <div id="message">
+        You just made me the happiest girl alive 🥰💗  
+        I love you more than words can explain.  
+        Happy Valentine's Day, my forever 💞
+    </div>
+
+<script>
+    function showMessage() {
+        document.getElementById("message").style.display = "block";
+    }
+
+    function moveButton() {
+        var button = document.getElementById("noBtn");
+        var x = Math.random() * (window.innerWidth - 100);
+        var y = Math.random() * (window.innerHeight - 50);
+        button.style.left = x + "px";
+        button.style.top = y + "px";
+    }
+
+    // Falling hearts
+    setInterval(function() {
+        var heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(function() {
+            heart.remove();
+        }, 5000);
+    }, 300);
+</script>
+
+</body>
+</html>
