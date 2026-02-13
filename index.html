@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>For My Love 💖</title>
+    <title>Our Love Story 💖</title>
     <style>
         body {
             background: linear-gradient(to right, #ff9a9e, #fecfef);
@@ -9,178 +9,121 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            /* Changed to auto so he can scroll once the hunt starts */
             overflow-x: hidden;
             overflow-y: auto; 
             transition: background 1s;
         }
 
-        h1 {
-            margin-top: 100px;
-            font-size: 40px;
-            color: white;
-        }
+        .container { padding: 20px; }
+        
+        h1 { margin-top: 50px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
 
-        .buttons {
-            margin-top: 50px;
+        .quest-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 85%;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: none;
+            color: #333;
         }
 
         button {
-            padding: 15px 30px;
-            font-size: 20px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            margin: 20px;
-            transition: 0.3s;
-        }
-
-        #yesBtn {
+            padding: 12px 25px;
             background-color: #ff4d6d;
             color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
         }
 
-        #yesBtn:hover {
-            background-color: #ff1e4d;
-        }
-
-        #noBtn {
-            background-color: white;
-            color: #ff4d6d;
-            position: absolute;
-        }
-
-        #message {
-            display: none;
-            margin-top: 50px;
-            font-size: 28px;
-            color: white;
-            padding: 20px;
-        }
-
-        /* Arsenal Quest Styles */
-        .hunt-section {
-            display: none;
-            padding: 50px 20px;
-            color: white;
-        }
-
-        .quest-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 2px solid #DB0007;
-            padding: 30px;
-            margin: 40px auto;
-            max-width: 80%;
-            border-radius: 20px;
-        }
+        #noBtn { position: absolute; background-color: white; color: #ff4d6d; }
 
         input {
-            padding: 10px;
+            padding: 12px;
             border-radius: 10px;
-            border: none;
-            margin-bottom: 10px;
+            border: 1px solid #ff9a9e;
+            margin: 15px 0;
             width: 80%;
+            font-size: 16px;
         }
 
-        .heart {
-            position: fixed;
-            top: -10px;
-            font-size: 20px;
-            animation: fall 5s linear infinite;
-            color: white;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(100vh); }
-        }
+        .heart { position: fixed; top: -10px; animation: fall 5s linear infinite; color: white; pointer-events: none; }
+        @keyframes fall { to { transform: translateY(100vh); } }
     </style>
 </head>
-
 <body>
 
-    <div id="start-screen">
+    <div id="start-screen" class="container">
         <h1>Will you be my Valentine? 💌</h1>
-        <div class="buttons">
-            <button id="yesBtn" onclick="showMessage()">Yes 💖</button>
+        <div style="margin-top: 50px;">
+            <button id="yesBtn" onclick="startHunt()">Yes 💖</button>
             <button id="noBtn" onmouseover="moveButton()">No 🙈</button>
         </div>
     </div>
 
-    <div id="message">
-        You just made me the happiest girl alive 🥰💗<br>
-        I love you more than words can explain.<br>
-        <br>
-        <b>But wait... a Gunner has to earn his trophy! 🏆</b>
-        <p>Scroll down for your challenge ↓</p>
-    </div>
-
-    <div id="hunt" class="hunt-section">
+    <div id="hunt-container" class="container">
         
-        <div class="quest-card">
-            <h3>🔴 Level 1: The Home Turf</h3>
-            <p>What is the name of the greatest stadium in North London?</p>
-            <input type="text" id="ans1" placeholder="Type name here...">
-            <button onclick="check1()" style="background: #DB0007; color: white;">Check VAR</button>
+        <div id="q1" class="quest-card">
+            <h2>Memory #1 🌹</h2>
+            <p>I'm the luckiest girl alive! But first... do you remember <b>which month</b> we first started talking?</p>
+            <input type="text" id="ans1" placeholder="Type the month...">
+            <br>
+            <button onclick="check1()">Next Memory ✨</button>
         </div>
 
-        <div id="q2" class="quest-card" style="display:none;">
-            <h3>⚪ Level 2: The Invincibles</h3>
-            <p>What year did Arsenal finish the season undefeated?</p>
-            <input type="number" id="ans2" placeholder="YYYY">
-            <button onclick="check2()" style="background: #DB0007; color: white;">Submit</button>
+        <div id="q2" class="quest-card">
+            <h2>Memory #2 ⚽</h2>
+            <p>You're the Arsenal to my Premier League! What is that one <b>nickname</b> you always call me?</p>
+            <input type="text" id="ans2" placeholder="Your nickname for me...">
+            <br>
+            <button onclick="check2()">Almost there...</button>
         </div>
 
-        <div id="final" style="display:none; padding-bottom: 100px;">
-            <h1 style="font-size: 60px;">🥇 YOU WIN! 🥇</h1>
-            <p style="font-size: 24px;">You're my #1 signing. Forever yours! ❤️</p>
-            <p>⚽⚽⚽</p>
+        <div id="final" class="quest-card">
+            <h1 style="color: #DB0007;">🏆 My Forever Champion 🏆</h1>
+            <p style="font-size: 22px;">You're my #1 signing and my favorite person in the world.</p>
+            <p style="font-size: 24px;">I love you more than Arsenal loves a North London Derby win! <br><b>Happy Valentine's Day! ❤️</b></p>
         </div>
+
     </div>
 
 <script>
-    function showMessage() {
-        // Show your original message
-        document.getElementById("message").style.display = "block";
-        // Show the hunt section
-        document.getElementById("hunt").style.display = "block";
-        // Change background to Arsenal colors
-        document.body.style.background = "#DB0007"; 
-        // Hide the original buttons
-        document.querySelector(".buttons").style.display = "none";
+    function startHunt() {
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('q1').style.display = 'block';
+        document.body.style.background = "#DB0007"; // Changes to Arsenal Red
+        alert("Yay! prove you remember our best moments to reach the trophy! 🏆");
+    }
+
+    function check1() {
+        // Change 'january' to your actual month
+        let val = document.getElementById('ans1').value.toLowerCase();
+        if(val.includes("january")) { 
+            document.getElementById('q2').style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        } else { alert("Wrong month! Think back to when it all started..."); }
+    }
+
+    function check2() {
+        // Change 'baby' to your actual nickname
+        let val = document.getElementById('ans2').value.toLowerCase();
+        if(val.includes("baby")) {
+            document.getElementById('final').style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        } else { alert("That's not it! Try the one that makes me blush."); }
     }
 
     function moveButton() {
         var button = document.getElementById("noBtn");
-        var x = Math.random() * (window.innerWidth - 100);
-        var y = Math.random() * (window.innerHeight - 50);
-        button.style.left = x + "px";
-        button.style.top = y + "px";
+        button.style.left = Math.random() * (window.innerWidth - 100) + "px";
+        button.style.top = Math.random() * (window.innerHeight - 50) + "px";
     }
 
-    // Hunt Logic
-    function check1() {
-        let val = document.getElementById("ans1").value.toLowerCase();
-        if(val.includes("emirates")) {
-            document.getElementById("q2").style.display = "block";
-            alert("GOAL! Level 2 unlocked.");
-        } else {
-            alert("Ref says: No goal! Try again.");
-        }
-    }
-
-    function check2() {
-        let val = document.getElementById("ans2").value;
-        if(val == "2004") {
-            document.getElementById("final").style.display = "block";
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            alert("The Trophy is Yours! 🏆❤️");
-        } else {
-            alert("Offside! Wrong year.");
-        }
-    }
-
-    // Your original Falling hearts
+    // Falling hearts
     setInterval(function() {
         var heart = document.createElement("div");
         heart.classList.add("heart");
@@ -188,13 +131,10 @@
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
         document.body.appendChild(heart);
-
-        setTimeout(function() {
-            heart.remove();
-        }, 5000);
+        setTimeout(() => heart.remove(), 5000);
     }, 300);
 </script>
-
 </body>
 </html>
+
 
