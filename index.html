@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,18 +16,36 @@
         }
 
         .container { padding: 20px; }
-        
         h1 { margin-top: 50px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
 
-        .quest-card {
+        .search-box {
             background: rgba(255, 255, 255, 0.9);
             padding: 30px;
-            margin: 40px auto;
+            margin: 20px auto;
             max-width: 85%;
-            border-radius: 20px;
+            border-radius: 50px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             display: none;
+        }
+
+        .result-card {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 85%;
+            border-radius: 20px;
+            display: none;
             color: #333;
+            border-left: 10px solid #DB0007;
+        }
+
+        input {
+            width: 70%;
+            padding: 15px;
+            border-radius: 30px;
+            border: 2px solid #ff4d6d;
+            font-size: 18px;
+            outline: none;
         }
 
         button {
@@ -41,16 +60,6 @@
         }
 
         #noBtn { position: absolute; background-color: white; color: #ff4d6d; }
-
-        input {
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #ff9a9e;
-            margin: 15px 0;
-            width: 80%;
-            font-size: 16px;
-        }
-
         .heart { position: fixed; top: -10px; animation: fall 5s linear infinite; color: white; pointer-events: none; }
         @keyframes fall { to { transform: translateY(100vh); } }
     </style>
@@ -65,56 +74,62 @@
         </div>
     </div>
 
-    <div id="hunt-container" class="container">
+    <div id="hunt-container" class="container" style="display:none;">
+        <h2 style="color:white;">Search our memories... 🔍</h2>
+        <div class="search-box" style="display:block;">
+            <input type="text" id="mainSearch" placeholder="Type a keyword...">
+            <br>
+            <button onclick="runSearch()">Search</button>
+        </div>
+
+        <div id="res-september" class="result-card"><h3>📅 September</h3><p>The month it all started. The best decision I ever made! ❤️</p></div>
+        <div id="res-bhondu" class="result-card"><h3>🤫 Bhondu</h3><p>Only you get to call me that. It's my favorite nickname because it's from you! 😘</p></div>
+        <div id="res-babyboy" class="result-card"><h3>👶 Babyboy</h3><p>My favorite person. You're literally the sweetest! ❤️</p></div>
+        <div id="res-sandhouse" class="result-card"><h3>🏖️ Sandhouse</h3><p>Building our own little world together, one grain at a time. 🏠</p></div>
+        <div id="res-food" class="result-card"><h3>🍕 Food</h3><p>Our love language! Can't wait for our next date night. 🤤</p></div>
+        <div id="res-arsenal" class="result-card"><h3>⚽ Arsenal</h3><p>I love you more than you love a 90th-minute winner at the Emirates! 🏆</p></div>
+        <div id="res-karan" class="result-card"><h3>🎶 Karan Aujla</h3><p>Vibin' to the beats with you is my favorite mood! 🎤✨</p></div>
         
-        <div id="q1" class="quest-card">
-            <h2>Memory #1 🌹</h2>
-            <p>I'm the luckiest girl alive! But first... do you remember <b>which month</b> we first started talking?</p>
-            <input type="text" id="ans1" placeholder="Type the month...">
-            <br>
-            <button onclick="check1()">Next Memory ✨</button>
+        <div id="final-msg" style="display:none; color:white; margin-top:30px;">
+            <h1>🏆 You've found everything!</h1>
+            <p style="font-size:22px;">Happy Valentine's Day, Bhondu! You're my forever winner. ❤️</p>
         </div>
-
-        <div id="q2" class="quest-card">
-            <h2>Memory #2 ⚽</h2>
-            <p>You're the Arsenal to my Premier League! What is that one <b>nickname</b> you always call me?</p>
-            <input type="text" id="ans2" placeholder="Your nickname for me...">
-            <br>
-            <button onclick="check2()">Almost there...</button>
-        </div>
-
-        <div id="final" class="quest-card">
-            <h1 style="color: #DB0007;">🏆 My Forever Champion 🏆</h1>
-            <p style="font-size: 22px;">You're my #1 signing and my favorite person in the world.</p>
-            <p style="font-size: 24px;">I love you more than Arsenal loves a North London Derby win! <br><b>Happy Valentine's Day! ❤️</b></p>
-        </div>
-
     </div>
 
 <script>
+    let foundCount = 0;
+    const total = 7;
+
     function startHunt() {
         document.getElementById('start-screen').style.display = 'none';
-        document.getElementById('q1').style.display = 'block';
-        document.body.style.background = "#DB0007"; // Changes to Arsenal Red
-        alert("Yay! prove you remember our best moments to reach the trophy! 🏆");
+        document.getElementById('hunt-container').style.display = 'block';
+        document.body.style.background = "#DB0007"; 
+        alert("Welcome to our private Google! Search for: september, bhondu, babyboy, sandhouse, food, arsenal, karan aujla");
     }
 
-    function check1() {
-        // Change 'january' to your actual month
-        let val = document.getElementById('ans1').value.toLowerCase();
-        if(val.includes("january")) { 
-            document.getElementById('q2').style.display = 'block';
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        } else { alert("Wrong month! Think back to when it all started..."); }
-    }
+    function runSearch() {
+        let query = document.getElementById('mainSearch').value.toLowerCase();
+        let targetId = "";
 
-    function check2() {
-        // Change 'baby' to your actual nickname
-        let val = document.getElementById('ans2').value.toLowerCase();
-        if(val.includes("baby")) {
-            document.getElementById('final').style.display = 'block';
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        } else { alert("That's not it! Try the one that makes me blush."); }
+        if(query.includes("september")) targetId = "res-september";
+        else if(query.includes("bhondu")) targetId = "res-bhondu";
+        else if(query.includes("babyboy")) targetId = "res-babyboy";
+        else if(query.includes("sandhouse")) targetId = "res-sandhouse";
+        else if(query.includes("food")) targetId = "res-food";
+        else if(query.includes("arsenal")) targetId = "res-arsenal";
+        else if(query.includes("karan aujla") || query.includes("karan")) targetId = "res-karan";
+
+        if(targetId !== "") {
+            let el = document.getElementById(targetId);
+            if(el.style.display !== "block") {
+                el.style.display = "block";
+                foundCount++;
+                window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+            }
+            if(foundCount === total) document.getElementById('final-msg').style.display = "block";
+        } else {
+            alert("No results found for that memory! Try another keyword.");
+        }
     }
 
     function moveButton() {
@@ -123,7 +138,6 @@
         button.style.top = Math.random() * (window.innerHeight - 50) + "px";
     }
 
-    // Falling hearts
     setInterval(function() {
         var heart = document.createElement("div");
         heart.classList.add("heart");
