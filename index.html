@@ -1,152 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Our Love Story 💖</title>
+    <title>Bhondu's Love Quest ❤️</title>
     <style>
         body {
-            background: linear-gradient(to right, #ff9a9e, #fecfef);
+            background: #DB0007; /* Arsenal Red */
             font-family: 'Comic Sans MS', cursive;
             text-align: center;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            overflow-y: auto; 
-            transition: background 1s;
-        }
-
-        .container { padding: 20px; }
-        h1 { margin-top: 50px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
-
-        .search-box {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            margin: 20px auto;
-            max-width: 85%;
-            border-radius: 50px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            display: none;
-        }
-
-        .result-card {
-            background: white;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 85%;
-            border-radius: 20px;
-            display: none;
-            color: #333;
-            border-left: 10px solid #DB0007;
-        }
-
-        input {
-            width: 70%;
-            padding: 15px;
-            border-radius: 30px;
-            border: 2px solid #ff4d6d;
-            font-size: 18px;
-            outline: none;
-        }
-
-        button {
-            padding: 12px 25px;
-            background-color: #ff4d6d;
             color: white;
-            border: none;
-            border-radius: 25px;
+            margin: 0; padding: 20px;
+            overflow-x: hidden;
+        }
+        .container { max-width: 500px; margin: auto; }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            justify-content: center;
+            margin: 20px auto;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 320px;
+        }
+        .cell {
+            aspect-ratio: 1/1;
+            background: #f0f0f0;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 4px;
+            user-select: none;
+        }
+        .word-list { margin-top: 20px; }
+        .word-item { 
+            display: inline-block; 
+            margin: 5px; 
+            padding: 8px 15px; 
+            background: rgba(255,255,255,0.2); 
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 18px;
-            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .word-found { 
+            background: #4CAF50; 
+            text-decoration: line-through; 
+            opacity: 0.7; 
         }
 
-        #noBtn { position: absolute; background-color: white; color: #ff4d6d; }
-        .heart { position: fixed; top: -10px; animation: fall 5s linear infinite; color: white; pointer-events: none; }
+        #final-screen {
+            display: none;
+            margin-top: 30px;
+            background: white;
+            color: #DB0007;
+            padding: 30px;
+            border-radius: 20px;
+            animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+        
+        .heart { position: fixed; top: -10px; animation: fall 5s linear infinite; color: white; }
         @keyframes fall { to { transform: translateY(100vh); } }
     </style>
 </head>
 <body>
 
-    <div id="start-screen" class="container">
-        <h1>Will you be my Valentine? 💌</h1>
-        <div style="margin-top: 50px;">
-            <button id="yesBtn" onclick="startHunt()">Yes 💖</button>
-            <button id="noBtn" onmouseover="moveButton()">No 🙈</button>
+    <div class="container">
+        <h1>Bhondu's Word Search 🔍</h1>
+        <p>Find our secret words in the grid and tap them below!</p>
+
+        <div class="grid">
+            <div class="cell">S</div><div class="cell">E</div><div class="cell">P</div><div class="cell">T</div><div class="cell">E</div><div class="cell">M</div><div class="cell">B</div><div class="cell">E</div><div class="cell">R</div><div class="cell">X</div>
+            <div class="cell">A</div><div class="cell">B</div><div class="cell">H</div><div class="cell">O</div><div class="cell">N</div><div class="cell">D</div><div class="cell">U</div><div class="cell">L</div><div class="cell">O</div><div class="cell">V</div>
+            <div class="cell">R</div><div class="cell">A</div><div class="cell">R</div><div class="cell">S</div><div class="cell">E</div><div class="cell">N</div><div class="cell">A</div><div class="cell">L</div><div class="cell">E</div><div class="cell">U</div>
+            <div class="cell">S</div><div class="cell">F</div><div class="cell">O</div><div class="cell">O</div><div class="cell">D</div><div class="cell">H</div><div class="cell">O</div><div class="cell">U</div><div class="cell">S</div><div class="cell">E</div>
+            <div class="cell">E</div><div class="cell">B</div><div class="cell">A</div><div class="cell">B</div><div class="cell">Y</div><div class="cell">B</div><div class="cell">O</div><div class="cell">Y</div><div class="cell">K</div><div class="cell">A</div>
+            <div class="cell">K</div><div class="cell">A</div><div class="cell">R</div><div class="cell">A</div><div class="cell">N</div><div class="cell">A</div><div class="cell">U</div><div class="cell">J</div><div class="cell">L</div><div class="cell">A</div>
+            <div class="cell">X</div><div class="cell">Y</div><div class="cell">Z</div><div class="cell">L</div><div class="cell">O</div><div class="cell">V</div><div class="cell">E</div><div class="cell">Y</div><div class="cell">O</div><div class="cell">U</div>
+            <div class="cell">M</div><div class="cell">E</div><div class="cell">M</div><div class="cell">O</div><div class="cell">R</div><div class="cell">I</div><div class="cell">E</div><div class="cell">S</div><div class="cell">O</div><div class="cell">F</div>
+            <div class="cell">B</div><div class="cell">E</div><div class="cell">S</div><div class="cell">T</div><div class="cell">T</div><div class="cell">E</div><div class="cell">A</div><div class="cell">M</div><div class="cell">P</div><div class="cell">L</div>
+            <div class="cell">H</div><div class="cell">A</div><div class="cell">P</div><div class="cell">P</div><div class="cell">Y</div><div class="cell">D</div><div class="cell">A</div><div class="cell">Y</div><div class="cell">S</div><div class="cell">❤️</div>
+        </div>
+
+        <div class="word-list">
+            <div class="word-item" onclick="found(this)">SEPTEMBER</div>
+            <div class="word-item" onclick="found(this)">BHONDU</div>
+            <div class="word-item" onclick="found(this)">ARSENAL</div>
+            <div class="word-item" onclick="found(this)">FOOD</div>
+            <div class="word-item" onclick="found(this)">BABYBOY</div>
+            <div class="word-item" onclick="found(this)">KARAN AUJLA</div>
+        </div>
+
+        <div id="final-screen">
+            <h1>🏆 You Won!</h1>
+            <p style="font-size: 20px;">Kuchupuchu I Love You! 🥰❤️</p>
+            <p>You're the best trophy I've ever won. <br>Happy Valentine's Day, my favorite person!</p>
         </div>
     </div>
 
-    <div id="hunt-container" class="container" style="display:none;">
-        <h2 style="color:white;">Search our memories... 🔍</h2>
-        <div class="search-box" style="display:block;">
-            <input type="text" id="mainSearch" placeholder="Type a keyword...">
-            <br>
-            <button onclick="runSearch()">Search</button>
-        </div>
+    <script>
+        let count = 0;
+        const total = 6;
 
-        <div id="res-september" class="result-card"><h3>📅 September</h3><p>The month it all started. The best decision I ever made! ❤️</p></div>
-        <div id="res-bhondu" class="result-card"><h3>🤫 Bhondu</h3><p>Only you get to call me that. It's my favorite nickname because it's from you! 😘</p></div>
-        <div id="res-babyboy" class="result-card"><h3>👶 Babyboy</h3><p>My favorite person. You're literally the sweetest! ❤️</p></div>
-        <div id="res-sandhouse" class="result-card"><h3>🏖️ Sandhouse</h3><p>Building our own little world together, one grain at a time. 🏠</p></div>
-        <div id="res-food" class="result-card"><h3>🍕 Food</h3><p>Our love language! Can't wait for our next date night. 🤤</p></div>
-        <div id="res-arsenal" class="result-card"><h3>⚽ Arsenal</h3><p>I love you more than you love a 90th-minute winner at the Emirates! 🏆</p></div>
-        <div id="res-karan" class="result-card"><h3>🎶 Karan Aujla</h3><p>Vibin' to the beats with you is my favorite mood! 🎤✨</p></div>
-        
-        <div id="final-msg" style="display:none; color:white; margin-top:30px;">
-            <h1>🏆 You've found everything!</h1>
-            <p style="font-size:22px;">Happy Valentine's Day, Bhondu! You're my forever winner. ❤️</p>
-        </div>
-    </div>
-
-<script>
-    let foundCount = 0;
-    const total = 7;
-
-    function startHunt() {
-        document.getElementById('start-screen').style.display = 'none';
-        document.getElementById('hunt-container').style.display = 'block';
-        document.body.style.background = "#DB0007"; 
-        alert("Welcome to our private Google! Search for: september, bhondu, babyboy, sandhouse, food, arsenal, karan aujla");
-    }
-
-    function runSearch() {
-        let query = document.getElementById('mainSearch').value.toLowerCase();
-        let targetId = "";
-
-        if(query.includes("september")) targetId = "res-september";
-        else if(query.includes("bhondu")) targetId = "res-bhondu";
-        else if(query.includes("babyboy")) targetId = "res-babyboy";
-        else if(query.includes("sandhouse")) targetId = "res-sandhouse";
-        else if(query.includes("food")) targetId = "res-food";
-        else if(query.includes("arsenal")) targetId = "res-arsenal";
-        else if(query.includes("karan aujla") || query.includes("karan")) targetId = "res-karan";
-
-        if(targetId !== "") {
-            let el = document.getElementById(targetId);
-            if(el.style.display !== "block") {
-                el.style.display = "block";
-                foundCount++;
-                window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+        function found(element) {
+            if (!element.classList.contains('word-found')) {
+                element.classList.add('word-found');
+                count++;
+                if (count === total) {
+                    document.getElementById('final-screen').style.display = 'block';
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                }
             }
-            if(foundCount === total) document.getElementById('final-msg').style.display = "block";
-        } else {
-            alert("No results found for that memory! Try another keyword.");
         }
-    }
 
-    function moveButton() {
-        var button = document.getElementById("noBtn");
-        button.style.left = Math.random() * (window.innerWidth - 100) + "px";
-        button.style.top = Math.random() * (window.innerHeight - 50) + "px";
-    }
-
-    setInterval(function() {
-        var heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
-    }, 300);
-</script>
+        // Falling hearts
+        setInterval(function() {
+            var heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "💖";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }, 300);
+    </script>
 </body>
 </html>
-
