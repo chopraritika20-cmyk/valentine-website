@@ -1,77 +1,77 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bhondu's Love Quest ❤️</title>
+    <title>For My Babyboy ❤️</title>
     <style>
         body {
-            background: #DB0007; /* Arsenal Red */
+            background: linear-gradient(to right, #ff9a9e, #fecfef);
             font-family: 'Comic Sans MS', cursive;
             text-align: center;
             color: white;
             margin: 0; padding: 20px;
             overflow-x: hidden;
+            transition: background 0.5s;
         }
         .container { max-width: 500px; margin: auto; }
         
+        /* Start Screen Styles */
+        #start-screen { padding-top: 100px; }
+        .buttons { margin-top: 50px; }
+        button {
+            padding: 15px 30px; font-size: 20px; border: none;
+            border-radius: 30px; cursor: pointer; transition: 0.3s;
+        }
+        #yesBtn { background-color: #ff4d6d; color: white; margin: 10px; }
+        #noBtn { background-color: white; color: #ff4d6d; position: absolute; margin: 10px; }
+
+        /* Grid Styles */
+        #game-screen { display: none; }
         .grid {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
-            gap: 5px;
-            justify-content: center;
-            margin: 20px auto;
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
+            gap: 5px; justify-content: center;
+            margin: 20px auto; background: white;
+            padding: 10px; border-radius: 10px;
             max-width: 320px;
         }
         .cell {
-            aspect-ratio: 1/1;
-            background: #f0f0f0;
-            color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-            border-radius: 4px;
-            user-select: none;
+            aspect-ratio: 1/1; background: #f0f0f0;
+            color: #333; display: flex;
+            align-items: center; justify-content: center;
+            font-weight: bold; font-size: 14px; border-radius: 4px;
         }
         .word-list { margin-top: 20px; }
         .word-item { 
-            display: inline-block; 
-            margin: 5px; 
-            padding: 8px 15px; 
-            background: rgba(255,255,255,0.2); 
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.3s;
+            display: inline-block; margin: 5px; 
+            padding: 8px 15px; background: rgba(255,255,255,0.2); 
+            border-radius: 20px; cursor: pointer;
         }
-        .word-found { 
-            background: #4CAF50; 
-            text-decoration: line-through; 
-            opacity: 0.7; 
-        }
+        .word-found { background: #4CAF50; text-decoration: line-through; opacity: 0.7; }
 
         #final-screen {
-            display: none;
-            margin-top: 30px;
-            background: white;
-            color: #DB0007;
-            padding: 30px;
-            border-radius: 20px;
+            display: none; margin-top: 30px;
+            background: white; color: #DB0007;
+            padding: 30px; border-radius: 20px;
             animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
         
-        .heart { position: fixed; top: -10px; animation: fall 5s linear infinite; color: white; }
+        .heart { position: fixed; top: -10px; animation: fall 5s linear infinite; color: white; pointer-events: none; }
         @keyframes fall { to { transform: translateY(100vh); } }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Bhondu's Word Search 🔍</h1>
+    <div id="start-screen">
+        <h1>Will you be my Valentine? 💌</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="startGame()">Yes 💖</button>
+            <button id="noBtn" onmouseover="moveButton()">No 🙈</button>
+        </div>
+    </div>
+
+    <div id="game-screen" class="container">
+        <h1>Baby's Word Search 🔍</h1>
         <p>Find our secret words in the grid and tap them below!</p>
 
         <div class="grid">
@@ -107,6 +107,12 @@
         let count = 0;
         const total = 6;
 
+        function startGame() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('game-screen').style.display = 'block';
+            document.body.style.background = "#DB0007"; // Arsenal Red
+        }
+
         function found(element) {
             if (!element.classList.contains('word-found')) {
                 element.classList.add('word-found');
@@ -118,7 +124,14 @@
             }
         }
 
-        // Falling hearts
+        function moveButton() {
+            var button = document.getElementById("noBtn");
+            var x = Math.random() * (window.innerWidth - 100);
+            var y = Math.random() * (window.innerHeight - 50);
+            button.style.left = x + "px";
+            button.style.top = y + "px";
+        }
+
         setInterval(function() {
             var heart = document.createElement("div");
             heart.classList.add("heart");
